@@ -1,0 +1,89 @@
+<!--%import("banner.css")-->
+<!--%import("./js/jquery.min.js")-->
+<!--%import("./js/slides.min.jquery.js")-->
+<style type="text/css" media="screen">
+		.slide_widget_{$widget_info->classPre} .mask {
+			width:{$widget_info->imgWidth}px !important;
+		}
+		#slides_{$widget_info->classPre},.slides_container_{$widget_info->classPre},.slides_container_{$widget_info->classPre} div {
+			width:{$widget_info->imgWidth}px !important;
+			<!--@if($widget_info->is_default)-->
+			height:{$widget_info->imgHeight+35}px !important;
+			<!--@else-->
+			height:{$widget_info->imgHeight}px !important;
+			<!--@end-->
+			display:block;
+		}
+		.buttonBox{
+			z-index:201
+		}
+		.section div{
+			z-index:200
+		}
+		<!--@if($widget_info->is_default)-->
+		.slide_widget_{$widget_info->classPre} ul{
+			position:relative;bottom:18px;z-index:150;
+		}
+		<!--@end-->
+</style>
+<div class="slide_widget_{$widget_info->classPre} slide_widget">
+	<div class="mask">
+		<div id="slides_{$widget_info->classPre}" class="slides">
+			<div class="slides_container_{$widget_info->classPre} slides_container xeBanner v{$xb} " style="display:none">
+				<!--@foreach($widget_info->info as $key => $row)-->
+				<div>
+					<a class="url_{$widget_info->classPre}" href="{$row['url']}">
+					<div class="section section_{$widget_info->classPre}">
+						<div>
+	                    <img src="{$row['image']}" width='{$widget_info->imgWidth}' height='{$widget_info->imgHeight}' <!--@if($row['title'])-->alt="{$row['title']}"<!--@end-->/>
+	                	</div>
+						<!--
+						<h1>{$row['title']}</h1>
+						<p>{$row['description']}</p>
+						-->
+					</div>
+					</a>
+				</div>
+				<!--@end-->
+			</div>
+		</div>
+		<!--@if($widget_info->is_default)-->
+			<div id="shadow" class="shadow" style="height:99px!important;display:none">
+				<img src="./images/slide_shadow.png" height="99" width="{$widget_info->imgWidth}" <!--@if($row['title'])-->alt="{$row['title']}" <!--@end--> class="iePngFix" />
+			</div>
+		<!--@end-->
+	</div>
+</div>
+
+
+
+<script>
+if('{$act}' != 'procWidgetGenerateCodeInPage'){
+	$(function(){
+		var links = $('a.url_{$widget_info->classPre}');
+		$('#slides_{$widget_info->classPre}').slides({
+			preload: true,
+			preloadImage: './images/loading.gif',
+			generateNextPrev: false,
+			play: 4000,
+			slideSpeed:1500,
+			paginationClass: "{'pagination_'.$widget_info->classPre}",
+			pause:1
+		});
+
+		$(".{'pagination_'.$widget_info->classPre}").addClass('pagination');
+		$('ul.pagination li a').html('&nbsp;&nbsp;');
+
+		if($.browser.msie&&($.browser.version == "6.0")&&!$.support.style){
+			var width = $('ul.pagination').width()+30;
+			$('ul.pagination').width(width);
+			$('div#shadow').css('margin-top','-120px');
+		}
+	});
+
+	jQuery(function($){
+		$('#shadow').show();
+	});
+
+}
+</script>
