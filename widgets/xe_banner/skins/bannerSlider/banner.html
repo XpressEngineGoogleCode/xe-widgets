@@ -21,9 +21,9 @@
 			z-index:200
 		}
 		<!--@if($widget_info->is_default)-->
-		.slide_widget_{$widget_info->classPre} ul{
-			position:relative;bottom:18px;z-index:150;
-		}
+			.slide_widget_{$widget_info->classPre} ul{
+				position:relative;bottom:18px;z-index:150;
+			}
 		<!--@end-->
 </style>
 <div class="slide_widget_{$widget_info->classPre} slide_widget">
@@ -55,8 +55,6 @@
 	</div>
 </div>
 
-
-
 <script>
 if('{$act}' != 'procWidgetGenerateCodeInPage'){
 	$(function(){
@@ -78,7 +76,13 @@ if('{$act}' != 'procWidgetGenerateCodeInPage'){
 			var width = $('ul.pagination').width()+30;
 			$('ul.pagination').width(width);
 			$('div#shadow').css('margin-top','-120px');
+			if('{$act}' == 'IS'){
+				$('div#shadow').css('margin-top','-150px');
+				$('.slide_widget_{$widget_info->classPre}').find('ul').css('bottom','33px');
+			}
 		}
+		if('{$act}' == 'IS')
+			$('.slide_widget_{$widget_info->classPre}').find('ul').css('bottom','33px');
 	});
 
 	jQuery(function($){
