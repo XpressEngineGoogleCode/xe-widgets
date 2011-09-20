@@ -61,7 +61,7 @@
             //no image add default images
             if(!count($widget_info->info)){
             	$widget_info->is_default = true;
-            	for($i=1;$i<=$imageNo;$i++){
+            	for($i=1;$i<=3;$i++){
             		$key = 'banner_'.$i;
             		$widget_info->info[$i]['url'] = 'http://www.xpressengine.com';
 		        	$widget_info->info[$i]['image'] = getUrl().$this->widget_path.'images/'.'defaultImg'.$i.'.jpg';
