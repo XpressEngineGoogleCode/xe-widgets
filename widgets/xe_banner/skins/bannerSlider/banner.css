@@ -12,14 +12,38 @@
 .xeBanner .section a{ position:absolute; height:22px; top:160px; left:15px; font-size:11px; padding:0 8px; overflow:hidden; text-decoration:none;}
 .xeBanner .section a span{ position:relative; top:-22px;}
 
-ul.pagination				{width:75px;height:10px;margin:0 auto !important;text-align:center !important;}
-ul.pagination li 			{float:left;list-style:none;width:10px;height:10px;margin-right:5px;background:url(./images/slide_page_off.gif) no-repeat top left;}
-ul.pagination li.current	{background:url(./images/slide_page_on.gif) no-repeat top left;}
+ul.pagination {
+	width:75px;
+	height:10px;
+	margin:0 auto !important;
+	text-align:center !important;
+	padding: 0;
+	position: relative;
+	top: -15px;
+}
+ul.pagination li 			{float:left;list-style:none;width:10px;height:10px;margin-right:5px;background:url(./images/slide_page_off.png) no-repeat top left;}
+ul.pagination li.current	{background:url(./images/slide_page_on.png) no-repeat top left;}
 ul.pagination a				{text-decoration:none;outline:none;}
 
 /* slide_widget */
-.slide_widget				{position:relative;}
-.slide_widget .mask			{position:relative;z-index:80;margin:0 auto;padding:0;overflow:hidden;}
+.slide_widget {
+	position:relative;
+	padding: 2px;
+}
+.slide_widget .mask {
+	position:relative;
+	z-index:80;
+	margin: 2px auto;
+	overflow:visible;
+	box-shadow: 0px 0px 3px rgba(0,0,0,.3);
+	-moz-box-shadow: 0px 0px 3px rgba(0,0,0,.3);
+	-webkit-box-shadow: 0px 0px 3px rgba(0,0,0,.3);
+	background: #fff;
+	padding: 15px;
+}
+.slide_widget .slides {
+
+}
 .slide_widget ul			{margin:0;}
 .slide_widget li			{float:left;list-style:none;}
 
@@ -39,9 +63,32 @@ ul.imgSet					{height:418px;position:absolute;left:width:100%;top:0;}
 
 ul.paging					{width:75px;height:10px;margin:0 auto !important;text-align:center;}
 .paging	li					{width:10px;height:10px;margin-right:5px;}
-.paging li.on				{background:url(../images/slide_page_on.gif) no-repeat top left;}
-.paging li.off				{background:url(../images/slide_page_off.gif) no-repeat top left;}
+.paging li.on				{background:url(../images/slide_page_on.png) no-repeat top left;}
+.paging li.off				{background:url(../images/slide_page_off.png) no-repeat top left;}
 .paging	li span				{visibility:hidden;}
 .paging	a					{text-decoration:none;}
 
 #shadow						{left: 0;margin-top: -105px;position: absolute;z-index: 10;}
+
+.cleared {
+	clear: both;
+}
+
+.slides .prev {
+	position: relative;
+	left: -36px;
+	background: url('images/prev.png') 0 0 no-repeat;
+	display: inline-block;
+	width: 21px;
+	height: 42px;
+	overflow: hidden;
+}
+
+.slides .next {
+	position: relative;
+	background: url('images/next.png') 0 0 no-repeat;
+	display: inline-block;
+	width: 21px;
+	height: 42px;
+	overflow: hidden;
+}
