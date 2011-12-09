@@ -395,8 +395,8 @@
 
 			// generate next/prev buttons
 			if (option.generateNextPrev) {
-				$('.' + option.container, elem).after('<a href="#" class="'+ option.prev +'">Prev</a>');
-				$('.' + option.prev, elem).after('<a href="#" class="'+ option.next +'">Next</a>');
+				$('.' + option.container, elem).after('<a href="#" class="'+ option.prev +'"></a>');
+				$('.' + option.prev, elem).after('<a href="#" class="'+ option.next +'"></a>');
 			}
 
 			// next button
