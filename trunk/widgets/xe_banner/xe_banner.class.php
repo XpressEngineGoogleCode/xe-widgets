@@ -16,8 +16,16 @@
          **/
         function proc($args) {
             //number of the image
-            $imageNo = 5;
-
+            //$imageNo = 5;
+			
+            $oModuleModel = &getModel('module');
+			$output = $oModuleModel->getModuleFileBoxList();
+            $imgSrcs = explode(",",$args->images);
+            foreach($output->data as $image){
+            	if(in_array($image->filename, $imgSrcs)) $images[]=$image;
+            }
+            $imageNo = count($images);
+            
             //height,width
             $intRE = '/[0-9]+/msi';
             $widget_info->imgHeight = '396';
@@ -29,35 +37,14 @@
    				$widget_info->imgWidth = $args->banner_width;
             }
 
-            // 위젯 변수 설정
+            // add images
             $widget_info->info = array();
-            for($i=1;$i<=$imageNo;$i++){
-            	//image
-            	$key = 'banner_'.$i;
-            	if(empty($args->$key)){
-            		continue;
-            	}
-            	$widget_info->info[$i]['image'] = $args->$key;
-
-            	//title
-            	$bKey = 'banner_title_'.$i;
-            	$widget_info->info[$i]['title'] = $args->$bKey;
-
-            	//descirption
-            	$bKey = 'banner_description_'.$i;
-            	$widget_info->info[$i]['descirption'] = $args->$bKey;
-
-            	//url
-            	$bKey = 'banner_url_'.$i;
-            	$widget_info->info[$i]['url'] = $args->$bKey;
-            	if(!$widget_info->info[$i]['url']) {
-            		$widget_info->info[$i]['url'] = 'http://www.xpressengine.com';
-            	}
-            	else if(!preg_match('/^http/i',$widget_info->info[$i]['url'])){
-            		$widget_info->info[$i]['url'] = 'http://'.$widget_info->info[$i]['url'];
-            	}
+            foreach($images as $i => $image){
+            	$widget_info->info[$i]['image'] = $image->filename;
+            	$widget_info->info[$i]['title'] = $image->attributes["title"];
+            	$widget_info->info[$i]['description'] = $image->attributes["description"];
+            	$widget_info->info[$i]['url'] = $image->attributes["url"];
             }
-
             //no image add default images
             if(!count($widget_info->info)){
             	$widget_info->is_default = true;
@@ -72,13 +59,15 @@
             $widget_info->classPre = rand();
             Context::set('widget_info', $widget_info);
 
-            // 템플릿의 스킨 경로를 지정 (skin, colorset에 따른 값을 설정)
+            // set template path
             $tpl_path = sprintf('%sskins/%s', $this->widget_path, $args->skin);
 
-            // 템플릿 파일을 지정
-            $tpl_file = 'banner';
-
-            // 템플릿 컴파일
+            // set skin file
+			if (in_array(Context::get('act'), array("procWidgetGenerateCodeInPage", "dispPageAdminContentModify")))
+                $tpl_file = 'pageedit';
+            else
+                $tpl_file = 'banner';
+            // set skin
             $oTemplate = &TemplateHandler::getInstance();
             return $oTemplate->compile($tpl_path, $tpl_file);
         }
